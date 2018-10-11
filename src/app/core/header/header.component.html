@@ -1,0 +1,69 @@
+<nav class=" navbar navbar-expand-sm bg-light">
+<div class="container-fluid">
+  <div class="navbar-header">
+  <a [routerLink]="['/']" class="navbar-brand">Recipe Book</a>
+</div>
+<ul class="navbar-nav mr-auto">
+  <li class="nav-item" routerLinkActive="active"><a  class="nav-link"[routerLink]="['recipes']">Recipes</a></li>
+  <li class="nav-item" routerLinkActive="active"><a class="nav-link" [routerLink]="['shopping-list']" >ShoppingList</a></li>
+  
+  
+
+
+</ul>
+
+<ul class="navbar-nav">
+  <ng-template [ngIf]="!authService.isAuthenticated()">
+      
+          <li class="nav-item" >
+            <a style="cursor: pointer;"
+             class="nav-link" [routerLink]="['signup']">Register
+            </a>
+          </li>
+          <li>
+          <a style="cursor: pointer;" class="nav-link"
+           [routerLink]="['signin']">SignIn
+          </a>
+          </li>
+        
+        
+  </ng-template>
+  <li class="nav-item">
+      <a style="cursor: pointer;" class="nav-link" 
+      (click)="onLogout()" [routerLink]="['recipes']" *ngIf="authService.isAuthenticated()">SignOut
+    </a>
+    </li>
+  
+  <li class="nav-item dropdown" dropdown *ngIf="authService.isAuthenticated()">
+      <a style="cursor: pointer;" class="nav-link dropdown-toggle" dropdownToggle id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+       Manage
+      </a>
+      <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a style="cursor: pointer;" class="dropdown-item" (click)="onSaveData()">Save</a>
+        <a style="cursor: pointer;" class="dropdown-item" (click)="onFetchData()">Fetch</a>
+        </div>
+    </li>
+
+</ul>
+  <div class="btn-group" dropdown >
+    <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+     Manage
+      <span class="caret"></span>
+    </button>
+    <ul *dropdownMenu class="dropdown-menu">
+      <li>
+        <a style="cursor: pointer;" (click)="onSaveData()">Save</a>
+      </li>
+      <li role="menuitem">
+        <a style="cursor: pointer;"  (click)="onFetchData()">Fetch</a>
+      </li>
+      
+    </ul>
+  </div>
+
+  
+
+</div>
+</nav>
+
+
